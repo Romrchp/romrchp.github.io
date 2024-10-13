@@ -138,13 +138,13 @@ const CONFIG = {
   ],
   publications: [
     {
-      title: 'Publication Title',
+      title: 'DGRPool: A web tool leveraging harmonized Drosophila Genetic Reference Panel phenotyping data for the study of complex traits',
       conferenceName: '',
-      journalName: 'Journal Name',
-      authors: 'John Doe, Jane Smith',
-      link: 'https://example.com',
+      journalName: 'eLife Sciences Publications, Ltd',
+      authors: 'Vincent Gardeux, Roel Bevers, Fabrice David, Emily Rosschaert, Romain Rochepeau, Bart Deplancke',
+      link: '10.7554/elife.88981.2',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'The web tool DGRPool presented in this paper makes data and results from the Drosophila Genetic Reference Panel accessible that will enable downstream analyses of genetic association. The findings of this paper are considered to be important, with practical implications beyond a single subfield, supported by convincing evidence using appropriate and validated methodology in line with current state of the art. The webtool is available at https://dgrpool.epfl.ch/',
     },
     {
       title: 'Publication Title',
