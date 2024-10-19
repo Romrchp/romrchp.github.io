@@ -113,6 +113,12 @@ const CONFIG = {
   educations: [
     {
       institution: 'École Polytechnique Fédérale de Lausanne (EPFL)',
+      degree: 'Master in Life Sciences Engineering, Minoring in Data Science',
+      from: '2022',
+      to: 'Present',
+    },
+    {
+      institution: 'École Polytechnique Fédérale de Lausanne (EPFL)',
       degree: 'Bachelor in Life Sciences Engineering',
       from: '2018',
       to: '2022',
