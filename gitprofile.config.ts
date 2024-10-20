@@ -37,7 +37,7 @@ const CONFIG = {
           description:
             'Functional web tool of the DGRPool project. Code for the data retrieval automation pipeline can be provided upon request, feel free to ask.',
           imageUrl:
-            'https://ibb.co/pxwbWqL',
+            'https://i.postimg.cc/cHh72KG0/DGRPool.png',
           link: 'https://dgrpool.epfl.ch/',
         },
        // {
