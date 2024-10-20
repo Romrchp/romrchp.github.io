@@ -136,7 +136,7 @@ const CONFIG = {
       conferenceName: '',
       journalName: 'eLife Sciences Publications, Ltd',
       authors: 'Vincent Gardeux, Roel Bevers, Fabrice David, Emily Rosschaert, Romain Rochepeau, Bart Deplancke',
-      link: 'dgrpool.pdf',
+      link: 'https://elifesciences.org/reviewed-preprints/88981v2#x-1553089916',
       description:
         'The web tool DGRPool presented in this paper makes data and results from the Drosophila Genetic Reference Panel accessible that will enable downstream analyses of genetic association.                 The webtool is available at https://dgrpool.epfl.ch/',
     },
