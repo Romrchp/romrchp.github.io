@@ -32,14 +32,14 @@ const CONFIG = {
       header: '',
       // To hide the `External Projects` section, keep it empty.
       projects: [
-        //{
-        //  title: 'Project Name',
-        //  description:
-        //    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
-        //  imageUrl:
-        //    'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg',
-        //  link: 'https://example.com',
-       // },
+        {
+          title: 'DGRPool',
+          description:
+            'Functional web tool of the DGRPool project. Code for the data retrieval automation pipeline can be provided upon request, feel free to ask.',
+          imageUrl:
+            'https://ibb.co/pxwbWqL',
+          link: 'https://dgrpool.epfl.ch/',
+        },
        // {
        //   title: 'Project Name',
         //  description:
@@ -138,7 +138,7 @@ const CONFIG = {
       authors: 'Vincent Gardeux, Roel Bevers, Fabrice David, Emily Rosschaert, Romain Rochepeau, Bart Deplancke',
       link: 'https://elifesciences.org/reviewed-preprints/88981v2#x-1553089916',
       description:
-        'The web tool DGRPool presented in this paper makes data and results from the Drosophila Genetic Reference Panel accessible that will enable downstream analyses of genetic association.                 The webtool is available at https://dgrpool.epfl.ch/',
+        'The web tool DGRPool presented in this paper makes data and results from the Drosophila Genetic Reference Panel accessible that will enable downstream analyses of genetic association.'
     },
   ],
   // Display articles from your medium or dev account. (Optional)
