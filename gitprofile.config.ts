@@ -13,14 +13,14 @@ const CONFIG = {
   projects: {
     github: {
       display: true, // Display GitHub projects?
-      header: 'Projects',
+      header: 'My Projects',
       mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
         sortBy: 'stars', // Sort projects by 'stars' or 'updated'
         limit: 8, // How many projects to display.
         exclude: {
           forks: true, // Forked projects will not be displayed if set to true.
-          projects: ['romrchp/graded-exs', 'romrchp/optml-project'], // These projects will not be displayed. example: ['arifszn/my-project1', 'arifszn/my-project2']
+          projects: ['romrchp/graded-exs', 'romrchp/optml-project', 'romrchp/dgrpool-pipeline'], // These projects will not be displayed. example: ['arifszn/my-project1', 'arifszn/my-project2']
         },
       },
       manual: {
@@ -29,7 +29,7 @@ const CONFIG = {
       },
     },
     external: {
-      header: '',
+      header: 'Others',
       // To hide the `External Projects` section, keep it empty.
       projects: [
         {
