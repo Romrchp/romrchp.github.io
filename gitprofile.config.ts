@@ -95,8 +95,8 @@ const CONFIG = {
   ],
   experiences: [
     {
-      company: 'Médecins sans Frontières / Doctors ',
-      position: 'Ingénieur Junior - Logistique Technique',
+      company: 'Médecins sans Frontières / Doctors Without Borders ',
+      position: 'Junior Engineer - Technical Logistics',
       from: 'August 2024',
       to: 'Present',
       companyLink: 'https://www.msf.ch/?_gl=1*z8n1k4*_up*MQ..&gclid=CjwKCAjw3624BhBAEiwAkxgTOoEVENrOogS1JxEe8R8pT7KGIubRStGW9sepfY062z2xhlJ9ge_fIRoCRjQQAvD_BwE',
