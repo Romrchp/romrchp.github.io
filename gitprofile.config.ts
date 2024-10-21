@@ -94,13 +94,13 @@ const CONFIG = {
     'JavaScript',
   ],
   experiences: [
-    {
-      company: 'Médecins sans Frontières / Doctors Without Borders ',
-      position: 'Junior Engineer - Technical Logistics',
-      from: 'August 2024',
-      to: 'Present',
-      companyLink: 'https://www.msf.ch/?_gl=1*z8n1k4*_up*MQ..&gclid=CjwKCAjw3624BhBAEiwAkxgTOoEVENrOogS1JxEe8R8pT7KGIubRStGW9sepfY062z2xhlJ9ge_fIRoCRjQQAvD_BwE',
-    },
+    //{
+    //  company: 'Médecins sans Frontières / Doctors Without Borders ',
+    //  position: 'Junior Engineer - Technical Logistics',
+    //  from: 'August 2024',
+    //  to: 'Present',
+    //  companyLink: 'https://www.msf.ch/?_gl=1*z8n1k4*_up*MQ..&gclid=CjwKCAjw3624BhBAEiwAkxgTOoEVENrOogS1JxEe8R8pT7KGIubRStGW9sepfY062z2xhlJ9ge_fIRoCRjQQAvD_BwE',
+    //},
   ],
 //  certifications: [
 //    {
@@ -111,24 +111,24 @@ const CONFIG = {
 //    },
 //  ],
   educations: [
-    {
-      institution: 'École Polytechnique Fédérale de Lausanne (EPFL)',
-      degree: 'Master in Life Sciences Engineering, Minoring in Data Science',
-      from: '2022',
-      to: 'Present',
-    },
-    {
-      institution: 'École Polytechnique Fédérale de Lausanne (EPFL)',
-      degree: 'Bachelor in Life Sciences Engineering',
-      from: '2018',
-      to: '2022',
-    },
-    {
-      institution: 'Lycée Polyvalent Jeanne d\'Arc',
-      degree: 'Baccaulauréat Scientifique',
-      from: '2015',
-      to: '2018',
-    },
+    //{
+    //  institution: 'École Polytechnique Fédérale de Lausanne (EPFL)',
+    //  degree: 'Master in Life Sciences Engineering, Minoring in Data Science',
+    //  from: '2022',
+    //  to: 'Present',
+    //},
+    //{
+    //  institution: 'École Polytechnique Fédérale de Lausanne (EPFL)',
+    //  degree: 'Bachelor in Life Sciences Engineering',
+    //  from: '2018',
+    //  to: '2022',
+    //},
+    //{
+    //  institution: 'Lycée Polyvalent Jeanne d\'Arc',
+    //  degree: 'Baccaulauréat Scientifique',
+    //  from: '2015',
+    //  to: '2018',
+    //},
   ],
   publications: [
     {
