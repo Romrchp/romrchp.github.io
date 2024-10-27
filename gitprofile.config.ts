@@ -57,7 +57,7 @@ const CONFIG = {
     imageURL: '',
   },
   social: {
-    linkedin: 'romain-rochepeau',
+    linkedin: '',
     twitter: '',
     mastodon: '',
     researchGate: '',
