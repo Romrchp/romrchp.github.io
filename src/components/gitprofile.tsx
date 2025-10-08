@@ -32,7 +32,7 @@ import Footer from './footer';
 import PublicationCard from './publication-card';
 
 /**
- * Renders the GitProfile component.
+ * Renders the GitProfile component with a project-focused layout.
  *
  * @param {Object} config - the configuration object
  * @return {JSX.Element} the rendered GitProfile component
@@ -194,58 +194,116 @@ const GitProfile = ({ config }: { config: Config }) => {
               googleAnalyticsId={sanitizedConfig.googleAnalytics.id}
               appliedTheme={theme}
             />
-            <div className={`p-4 lg:p-10 min-h-full ${BG_COLOR}`}>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 rounded-box">
-                <div className="col-span-1">
-                  <div className="grid grid-cols-1 gap-6">
-                    {!sanitizedConfig.themeConfig.disableSwitch && (
-                      <ThemeChanger
-                        theme={theme}
-                        setTheme={setTheme}
-                        loading={loading}
-                        themeConfig={sanitizedConfig.themeConfig}
-                      />
+            <div className={`min-h-full ${BG_COLOR}`}>
+              {/* Hero Section - Welcome */}
+              <div className="hero min-h-screen bg-base-200">
+                <div className="hero-content text-center">
+                  <div className="max-w-4xl">
+                    {/* Theme Changer - Top Right Corner */}
+                    <div className="absolute top-4 right-4">
+                      {!sanitizedConfig.themeConfig.disableSwitch && (
+                        <ThemeChanger
+                          theme={theme}
+                          setTheme={setTheme}
+                          loading={loading}
+                          themeConfig={sanitizedConfig.themeConfig}
+                        />
+                      )}
+                    </div>
+
+                    {/* Profile Avatar */}
+                    {profile && (
+                      <div className="avatar mb-8">
+                        <div className="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                          <img src={profile.avatar} alt={profile.name} />
+                        </div>
+                      </div>
                     )}
-                    <AvatarCard
-                      profile={profile}
-                      loading={loading}
-                      avatarRing={sanitizedConfig.themeConfig.displayAvatarRing}
-                      resumeFileUrl={sanitizedConfig.resume.fileUrl}
-                    />
-                    <DetailsCard
-                      profile={profile}
-                      loading={loading}
-                      github={sanitizedConfig.github}
-                      social={sanitizedConfig.social}
-                    />
-                    {sanitizedConfig.skills.length !== 0 && (
-                      <SkillCard
-                        loading={loading}
-                        skills={sanitizedConfig.skills}
-                      />
+
+                    {/* Welcome Message */}
+                    <h1 className="text-5xl font-bold mb-4 text-base-content">
+                      Welcome to My Projects! 👋
+                    </h1>
+                    
+                    {profile && (
+                      <>
+                        <h2 className="text-3xl font-semibold mb-4 text-base-content opacity-80">
+                          {profile.name}
+                        </h2>
+                        {profile.bio && (
+                          <p className="text-xl mb-6 text-base-content opacity-70">
+                            {profile.bio}
+                          </p>
+                        )}
+                      </>
                     )}
-                    {sanitizedConfig.experiences.length !== 0 && (
-                      <ExperienceCard
-                        loading={loading}
-                        experiences={sanitizedConfig.experiences}
-                      />
-                    )}
-                    {sanitizedConfig.certifications.length !== 0 && (
-                      <CertificationCard
-                        loading={loading}
-                        certifications={sanitizedConfig.certifications}
-                      />
-                    )}
-                    {sanitizedConfig.educations.length !== 0 && (
-                      <EducationCard
-                        loading={loading}
-                        educations={sanitizedConfig.educations}
-                      />
-                    )}
+
+                    <p className="text-lg mb-8 text-base-content opacity-60">
+                      Explore my research publications, GitHub projects, and other work below.
+                    </p>
+
+                    {/* Quick Contact Info */}
+                    <div className="flex justify-center gap-4 mb-8 flex-wrap">
+                      {sanitizedConfig.social.email && (
+                        <a
+                          href={`mailto:${sanitizedConfig.social.email}`}
+                          className="btn btn-outline btn-sm"
+                        >
+                          Email Me
+                        </a>
+                      )}
+                      {sanitizedConfig.social.phone && (
+                        <a
+                          href={`tel:${sanitizedConfig.social.phone}`}
+                          className="btn btn-outline btn-sm"
+                        >
+                          Call Me
+                        </a>
+                      )}
+                      <a
+                        href={`https://github.com/${sanitizedConfig.github.username}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-outline btn-sm"
+                      >
+                        GitHub Profile
+                      </a>
+                    </div>
+
+                    {/* Scroll Indicator */}
+                    <div className="mt-12">
+                      <p className="text-sm text-base-content opacity-50 mb-2">
+                        Scroll down to explore
+                      </p>
+                      <svg
+                        className="w-6 h-6 mx-auto animate-bounce text-base-content opacity-50"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                      </svg>
+                    </div>
                   </div>
                 </div>
-                <div className="lg:col-span-2 col-span-1">
+              </div>
+
+              {/* Projects Section */}
+              <div className="p-4 lg:p-10">
+                <div className="max-w-7xl mx-auto">
                   <div className="grid grid-cols-1 gap-6">
+                    {/* Publications Section */}
+                    {sanitizedConfig.publications.length !== 0 && (
+                      <PublicationCard
+                        loading={loading}
+                        publications={sanitizedConfig.publications}
+                      />
+                    )}
+
+                    {/* GitHub Projects Section */}
                     {sanitizedConfig.projects.github.display && (
                       <GithubProjectCard
                         header={sanitizedConfig.projects.github.header}
@@ -256,23 +314,18 @@ const GitProfile = ({ config }: { config: Config }) => {
                         googleAnalyticsId={sanitizedConfig.googleAnalytics.id}
                       />
                     )}
-                    {sanitizedConfig.publications.length !== 0 && (
-                      <PublicationCard
-                        loading={loading}
-                        publications={sanitizedConfig.publications}
-                      />
-                    )}
-                    {sanitizedConfig.projects.external.projects.length !==
-                      0 && (
+
+                    {/* External Projects Section */}
+                    {sanitizedConfig.projects.external.projects.length !== 0 && (
                       <ExternalProjectCard
                         loading={loading}
                         header={sanitizedConfig.projects.external.header}
-                        externalProjects={
-                          sanitizedConfig.projects.external.projects
-                        }
+                        externalProjects={sanitizedConfig.projects.external.projects}
                         googleAnalyticId={sanitizedConfig.googleAnalytics.id}
                       />
                     )}
+
+                    {/* Blog Section */}
                     {sanitizedConfig.blog.display && (
                       <BlogCard
                         loading={loading}
@@ -281,13 +334,72 @@ const GitProfile = ({ config }: { config: Config }) => {
                       />
                     )}
                   </div>
+
+                  {/* About Me Section - Collapsible */}
+                  <div className="mt-12">
+                    <div className="collapse collapse-arrow bg-base-100 shadow-lg">
+                      <input type="checkbox" />
+                      <div className="collapse-title text-xl font-medium">
+                        More About Me
+                      </div>
+                      <div className="collapse-content">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                          {/* Avatar & Details */}
+                          <div className="space-y-6">
+                            <AvatarCard
+                              profile={profile}
+                              loading={loading}
+                              avatarRing={sanitizedConfig.themeConfig.displayAvatarRing}
+                              resumeFileUrl={sanitizedConfig.resume.fileUrl}
+                            />
+                            <DetailsCard
+                              profile={profile}
+                              loading={loading}
+                              github={sanitizedConfig.github}
+                              social={sanitizedConfig.social}
+                            />
+                          </div>
+
+                          {/* Skills */}
+                          {sanitizedConfig.skills.length !== 0 && (
+                            <SkillCard
+                              loading={loading}
+                              skills={sanitizedConfig.skills}
+                            />
+                          )}
+
+                          {/* Experience & Education */}
+                          <div className="space-y-6">
+                            {sanitizedConfig.experiences.length !== 0 && (
+                              <ExperienceCard
+                                loading={loading}
+                                experiences={sanitizedConfig.experiences}
+                              />
+                            )}
+                            {sanitizedConfig.educations.length !== 0 && (
+                              <EducationCard
+                                loading={loading}
+                                educations={sanitizedConfig.educations}
+                              />
+                            )}
+                            {sanitizedConfig.certifications.length !== 0 && (
+                              <CertificationCard
+                                loading={loading}
+                                certifications={sanitizedConfig.certifications}
+                              />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Footer */}
             {sanitizedConfig.footer && (
-              <footer
-                className={`p-4 footer ${BG_COLOR} text-base-content footer-center`}
-              >
+              <footer className={`p-4 footer ${BG_COLOR} text-base-content footer-center`}>
                 <div className="card compact bg-base-100 shadow">
                   <Footer content={sanitizedConfig.footer} loading={loading} />
                 </div>
