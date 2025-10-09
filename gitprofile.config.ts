@@ -23,6 +23,15 @@ const CONFIG = {
           projects: ['romrchp/graded-exs', 'romrchp/optml-project', 'romrchp/dgrpool-pipeline'], // These projects will not be displayed. example: ['arifszn/my-project1', 'arifszn/my-project2']
         },
       },
+      images: {
+        'directors-analysis': 'https://i.postimg.cc/grFxCtVj/director.jpg',
+        'csa-journey-planner': 'https://i.postimg.cc/q7hSDmvb/zurich.jpg',
+        'personalised-reminders-rct': 'https://i.postimg.cc/PqYK80xH/food-tracking.jpg',
+        'chambolle-denoising': 'https://i.postimg.cc/3RyS993r/image-denoising.png',
+        'pully-weather-forecast': 'https://i.postimg.cc/15zgddLc/high-angle-closeup-shot-isolated-green-leaf-puddle-rainy-day.jpg',
+        'utae-cell-segmentation': 'https://i.postimg.cc/V6yGGnv5/cell-segmentation.png',
+      },
+    },
       manual: {
         // Properties for manually specifying projects
         projects: ['arifszn/gitprofile', 'arifszn/pandora'], // List of repository names to display. example: ['arifszn/my-project1', 'arifszn/my-project2']

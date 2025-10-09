@@ -3,6 +3,7 @@ import { AiOutlineFork, AiOutlineStar } from 'react-icons/ai';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { ga, getLanguageColor, skeleton } from '../../utils';
 import { GithubProject } from '../../interfaces/github-project';
+import CONFIG from '../../../gitprofile.config';
 
 const GithubProjectCard = ({
   header,
@@ -10,7 +11,7 @@ const GithubProjectCard = ({
   loading,
   limit,
   username,
-  googleAnalyticsId,
+  googleAnalyticsId
 }: {
   header: string;
   githubProjects: GithubProject[];
@@ -24,24 +25,27 @@ const GithubProjectCard = ({
   }
 
   // Helper function to get project image from config or use a gradient placeholder
-  const getProjectVisual = (projectName: string) => {
-    // Check if there's a custom image defined in the config
-    // You can add this to your gitprofile.config.ts like:
-    // projects: { github: { images: { 'repo-name': 'url' } } }
-    
-    // For now, we'll use gradient placeholders based on the project name
-    const gradients = [
-      'from-blue-500 to-cyan-500',
-      'from-purple-500 to-pink-500',
-      'from-green-500 to-emerald-500',
-      'from-orange-500 to-red-500',
-      'from-indigo-500 to-purple-500',
-      'from-yellow-500 to-orange-500',
-    ];
-    
-    const index = projectName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return gradients[index % gradients.length];
-  };
+const getProjectVisual = (projectName: string) => {
+  const imageMap = CONFIG.projects.github.images || {};
+
+  // ✅ Return custom image if found
+  if (imageMap[projectName]) {
+    return { type: 'image', value: imageMap[projectName] };
+  }
+
+  // Otherwise, return a gradient fallback
+  const gradients = [
+    'from-blue-500 to-cyan-500',
+    'from-purple-500 to-pink-500',
+    'from-green-500 to-emerald-500',
+    'from-orange-500 to-red-500',
+    'from-indigo-500 to-purple-500',
+    'from-yellow-500 to-orange-500',
+  ];
+
+  const index = projectName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return { type: 'gradient', value: gradients[index % gradients.length] };
+};
 
   const renderSkeleton = () => {
     const array = [];
