@@ -31,7 +31,8 @@ const GithubProjectCard = ({
       console.warn('Config file not loaded:', e);
     }
 
-    if (imageMap[projectName]) return { type: 'image', value: imageMap[projectName] };
+    const key = projectName.toLowerCase();
+    if (imageMap[key]) return { type: 'image', value: imageMap[key] };
 
     const gradients = [
       'from-blue-500 to-cyan-500',
