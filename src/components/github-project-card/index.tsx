@@ -24,12 +24,12 @@ const GithubProjectCard = ({
   if (!loading && githubProjects.length === 0) return null;
 
   // Helper function to get project image or fallback to gradient
-  const getProjectVisual = (projectName: string) => {
-    const imageMap = CONFIG_JSON.projects.github.images || {};
+  const imageMap: Record<string, string> = CONFIG_JSON.projects.github.images || {};
 
-    if (imageMap[projectName]) {
-      return { type: 'image', value: imageMap[projectName] };
-    }
+  if (imageMap[projectName]) {
+    return { type: 'image', value: imageMap[projectName] };
+  }
+
 
     const gradients = [
       'from-blue-500 to-cyan-500',
