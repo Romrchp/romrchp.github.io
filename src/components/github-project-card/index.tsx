@@ -21,19 +21,22 @@ const GithubProjectCard = ({
 }) => {
   if (!loading && githubProjects.length === 0) return null;
 
-  // Helper to get either image or gradient for a project
-  const getProjectVisual = (projectName: string) => {
-    let imageMap: Record<string, string> = {};
-    try {
-      const config = require('../../../gitprofile.config').default;
-      imageMap = config.projects.github.images || {};
-    } catch (e) {
-      console.warn('Config file not loaded:', e);
-    }
+  // Load config images
+  let imageMap: Record<string, string> = {};
+  try {
+    const config = require('../../../gitprofile.config').default;
+    imageMap = config.projects.github.images || {};
+    console.log('Loaded config images:', imageMap);
+  } catch (e) {
+    console.warn('Config file not loaded:', e);
+  }
 
+  // Helper: get image or gradient
+  const getProjectVisual = (projectName: string) => {
     const key = projectName.toLowerCase();
     if (imageMap[key]) return { type: 'image', value: imageMap[key] };
 
+    // fallback gradient
     const gradients = [
       'from-blue-500 to-cyan-500',
       'from-purple-500 to-pink-500',
@@ -42,7 +45,9 @@ const GithubProjectCard = ({
       'from-indigo-500 to-purple-500',
       'from-yellow-500 to-orange-500',
     ];
-    const index = projectName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const index = projectName
+      .split('')
+      .reduce((acc, char) => acc + char.charCodeAt(0), 0);
     return { type: 'gradient', value: gradients[index % gradients.length] };
   };
 
@@ -54,33 +59,40 @@ const GithubProjectCard = ({
           <div className="flex justify-between flex-col p-8 h-full w-full">
             <div>
               <div className="flex items-center">
-                <h5 className="card-title text-lg">
-                  {skeleton({ widthCls: 'w-32', heightCls: 'h-8', className: 'mb-1' })}
-                </h5>
+                <span>
+                  <h5 className="card-title text-lg">
+                    {skeleton({ widthCls: 'w-32', heightCls: 'h-8', className: 'mb-1' })}
+                  </h5>
+                </span>
               </div>
               <div className="mb-5 mt-1">
                 {skeleton({ widthCls: 'w-full', heightCls: 'h-4', className: 'mb-2' })}
               </div>
             </div>
           </div>
-        </div>
+        </div>,
       );
     }
     return array;
   };
 
   const renderProjects = () => {
+    console.log('Rendering projects:', githubProjects.map(p => p.name));
+
     return githubProjects.map((item, index) => {
       const visual = getProjectVisual(item.name);
+      console.log(item.name, visual);
 
       return (
         <div
           className="card shadow-xl hover:shadow-2xl transition-all duration-300 bg-base-100 cursor-pointer hover:-translate-y-1 overflow-hidden group"
           key={index}
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
             try {
-              if (googleAnalyticsId) ga.event('Click project', { project: item.name });
+              if (googleAnalyticsId) {
+                ga.event('Click project', { project: item.name });
+              }
             } catch (error) {
               console.error(error);
             }
@@ -89,22 +101,11 @@ const GithubProjectCard = ({
         >
           {/* Visual Header */}
           <div
-            className="relative h-32 overflow-hidden"
-            style={
-              visual.type === 'image'
-                ? {
-                    backgroundImage: `url(${visual.value})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                  }
-                : undefined
-            }
+            className={`relative h-32 overflow-hidden ${
+              visual.type === 'gradient' ? `bg-gradient-to-br ${visual.value}` : ''
+            }`}
+            style={visual.type === 'image' ? { backgroundImage: `url(${visual.value})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
           >
-            {visual.type === 'gradient' && (
-              <div className={`absolute inset-0 bg-gradient-to-br ${visual.value}`}></div>
-            )}
-            {/* Dark overlay + GitHub icon */}
             <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
             <div className="absolute inset-0 flex items-center justify-center">
               <FaGithub className="text-white text-5xl opacity-40 group-hover:opacity-60 transition-opacity duration-300" />
@@ -122,18 +123,15 @@ const GithubProjectCard = ({
             )}
           </div>
 
+          {/* Card body */}
           <div className="card-body">
             <h2 className="card-title text-lg flex items-center justify-between text-base-content hover:text-primary transition-colors mb-2">
               <span className="truncate">{item.name}</span>
               <FaExternalLinkAlt className="text-xs flex-shrink-0 opacity-50" />
             </h2>
-
             {item.description && (
-              <p className="text-base-content opacity-70 text-sm leading-relaxed mb-4 line-clamp-2">
-                {item.description}
-              </p>
+              <p className="text-base-content opacity-70 text-sm leading-relaxed mb-4 line-clamp-2">{item.description}</p>
             )}
-
             {item.topics && item.topics.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
                 {item.topics.slice(0, 5).map((topic, topicIndex) => (
@@ -145,14 +143,11 @@ const GithubProjectCard = ({
                   </span>
                 ))}
                 {item.topics.length > 5 && (
-                  <span className="badge badge-sm badge-ghost">
-                    +{item.topics.length - 5} more
-                  </span>
+                  <span className="badge badge-sm badge-ghost">+{item.topics.length - 5} more</span>
                 )}
               </div>
             )}
 
-            {/* Stats */}
             <div className="flex items-center gap-4 pt-4 border-t border-base-300 mt-auto">
               <div className="flex items-center gap-2 text-base-content">
                 <AiOutlineStar className="text-yellow-500 text-lg" />
@@ -174,7 +169,6 @@ const GithubProjectCard = ({
       <div className="col-span-1 lg:col-span-2">
         <div className="grid grid-cols-1 gap-6">
           <div className="col-span-1">
-            {/* Section Header */}
             <div className="flex items-center justify-between mb-8">
               <div>
                 <div className="flex items-center gap-3 mb-2">
@@ -200,7 +194,6 @@ const GithubProjectCard = ({
               )}
             </div>
 
-            {/* Projects Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {loading ? renderSkeleton() : renderProjects()}
             </div>
