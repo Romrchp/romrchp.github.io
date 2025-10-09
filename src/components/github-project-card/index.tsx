@@ -3,7 +3,6 @@ import { AiOutlineFork, AiOutlineStar } from 'react-icons/ai';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { ga, getLanguageColor, skeleton } from '../../utils';
 import { GithubProject } from '../../interfaces/github-project';
-import CONFIG from '../../../gitprofile.config';
 
 const GithubProjectCard = ({
   header,
@@ -26,7 +25,13 @@ const GithubProjectCard = ({
 
   // Helper function to get project image from config or use a gradient placeholder
 const getProjectVisual = (projectName: string) => {
-  const imageMap = CONFIG.projects.github.images || {};
+  let imageMap: Record<string, string> = {};
+  try {
+    const config = require('../../../gitprofile.config').default;
+    imageMap = config.projects.github.images || {};
+  } catch (e) {
+    console.warn('Config file not loaded:', e);
+  }
 
   // ✅ Return custom image if found
   if (imageMap[projectName]) {
