@@ -124,7 +124,7 @@ const GithubProjectCard = ({
           <div className="card-body">
             {/* Project Title */}
             <h2 className="card-title text-lg flex items-center justify-between text-base-content hover:text-primary transition-colors mb-2">
-              <span className="truncate">{displayTitle}</span>
+              <span className="whitespace-normal break-words">{displayTitle}</span>
               <FaExternalLinkAlt className="text-xs flex-shrink-0 opacity-50" />
             </h2>
 
