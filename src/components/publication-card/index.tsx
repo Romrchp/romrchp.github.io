@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { SanitizedPublication } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
-import { FaBook, FaUniversity, FaUsers, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaUniversity, FaUsers, FaExternalLinkAlt } from 'react-icons/fa';
 
 const PublicationCard = ({
   publications,
