@@ -32,10 +32,9 @@ import Footer from './footer';
 import PublicationCard from './publication-card';
 
 /**
- * Renders the GitProfile component with a project-focused layout.
  *
- * @param {Object} config - the configuration object
- * @return {JSX.Element} the rendered GitProfile component
+ * @param {Object} config 
+ * @return {JSX.Element}
  */
 const GitProfile = ({ config }: { config: Config }) => {
   const [sanitizedConfig] = useState<SanitizedConfig | Record<string, never>>(
@@ -222,7 +221,7 @@ const GitProfile = ({ config }: { config: Config }) => {
 
                     {/* Welcome Message */}
                     <h1 className="text-5xl font-bold mb-4 text-base-content">
-                      Welcome to My Projects! 👋
+                      Welcome to my Portfolio! 👋
                     </h1>
                     
                     {profile && (
@@ -239,7 +238,7 @@ const GitProfile = ({ config }: { config: Config }) => {
                     )}
 
                     <p className="text-lg mb-8 text-base-content opacity-60">
-                      Explore my research publications, GitHub projects, and other work below.
+                      Feel free to explore my GitHub projects, publications, and other work below.
                     </p>
 
                     {/* Quick Contact Info */}
