@@ -1,10 +1,9 @@
 import { Fragment } from 'react';
 import { AiOutlineFork, AiOutlineStar } from 'react-icons/ai';
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import { ga, getLanguageColor, skeleton } from '../../utils';
 import { GithubProject } from '../../interfaces/github-project';
 
-// Import only the images JSON
 import IMAGES from '../../../gitprofile-images.json';
 
 const GithubProjectCard = ({
@@ -28,12 +27,10 @@ const GithubProjectCard = ({
   const getProjectVisual = (projectName: string) => {
     const imageMap: Record<string, string> = IMAGES;
 
-    // Return image if found
     if (imageMap[projectName]) {
       return { type: 'image' as const, value: imageMap[projectName] };
     }
 
-    // Fallback to gradient
     const gradients = [
       'from-blue-500 to-cyan-500',
       'from-purple-500 to-pink-500',
@@ -105,9 +102,6 @@ const GithubProjectCard = ({
               <div className={`absolute inset-0 bg-gradient-to-br ${visual.value}`}></div>
             )}
             <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <FaGithub className="text-white text-5xl opacity-40 group-hover:opacity-60 transition-opacity duration-300" />
-            </div>
 
             {item.language && (
               <div className="absolute top-3 right-3 flex items-center gap-2 bg-base-100 bg-opacity-90 px-3 py-1 rounded-full shadow-md">
@@ -127,24 +121,27 @@ const GithubProjectCard = ({
             </h2>
 
             {item.description && (
-              <p className="text-base-content opacity-70 text-sm leading-relaxed mb-4 line-clamp-2">
+              <p className="text-base-content opacity-70 text-sm leading-relaxed mb-2 line-clamp-2">
                 {item.description}
               </p>
             )}
 
             {item.topics && item.topics.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-4">
-                {item.topics.slice(0, 5).map((topic, topicIndex) => (
-                  <span
-                    key={topicIndex}
-                    className="badge badge-sm bg-primary bg-opacity-10 text-primary border-primary border-opacity-20 font-medium"
-                  >
-                    {topic}
-                  </span>
-                ))}
-                {item.topics.length > 5 && (
-                  <span className="badge badge-sm badge-ghost">+{item.topics.length - 5} more</span>
-                )}
+              <div className="flex flex-col mb-4">
+                <span className="text-sm font-semibold text-base-content mb-1">Keywords:</span>
+                <div className="flex flex-wrap gap-2">
+                  {item.topics.slice(0, 5).map((topic, topicIndex) => (
+                    <span
+                      key={topicIndex}
+                      className="badge badge-sm bg-primary bg-opacity-10 text-primary border-primary border-opacity-20 font-medium"
+                    >
+                      {topic}
+                    </span>
+                  ))}
+                  {item.topics.length > 5 && (
+                    <span className="badge badge-sm badge-ghost">+{item.topics.length - 5} more</span>
+                  )}
+                </div>
               </div>
             )}
 
