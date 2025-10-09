@@ -3,7 +3,7 @@ import { AiOutlineFork, AiOutlineStar } from 'react-icons/ai';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { ga, getLanguageColor, skeleton } from '../../utils';
 import { GithubProject } from '../../interfaces/github-project';
-import CONFIG from '../../../config';
+import CONFIG from '../../../gitprofile.config';
 
 const GithubProjectCard = ({
   header,
