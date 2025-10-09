@@ -5,6 +5,7 @@ import { ga, getLanguageColor, skeleton } from '../../utils';
 import { GithubProject } from '../../interfaces/github-project';
 
 import IMAGES from '../../../gitprofile-images.json';
+import TITLES from '../../../gitprofile-titles.json';
 
 const GithubProjectCard = ({
   header,
@@ -46,6 +47,11 @@ const GithubProjectCard = ({
     return { type: 'gradient' as const, value: gradients[index % gradients.length] };
   };
 
+  const getProjectTitle = (projectName: string) => {
+    const titleMap: Record<string, string> = TITLES;
+    return titleMap[projectName] || projectName;
+  };
+
   const renderSkeleton = () => {
     const array = [];
     for (let index = 0; index < limit; index++) {
@@ -72,6 +78,7 @@ const GithubProjectCard = ({
   const renderProjects = () => {
     return githubProjects.map((item, index) => {
       const visual = getProjectVisual(item.name);
+      const displayTitle = getProjectTitle(item.name);
 
       return (
         <div
@@ -115,8 +122,9 @@ const GithubProjectCard = ({
           </div>
 
           <div className="card-body">
+            {/* Project Title */}
             <h2 className="card-title text-lg flex items-center justify-between text-base-content hover:text-primary transition-colors mb-2">
-              <span className="truncate">{item.name}</span>
+              <span className="truncate">{displayTitle}</span>
               <FaExternalLinkAlt className="text-xs flex-shrink-0 opacity-50" />
             </h2>
 
