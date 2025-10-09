@@ -87,96 +87,112 @@ const getProjectVisual = (projectName: string) => {
   };
 
   const renderProjects = () => {
-    return githubProjects.map((item, index) => {
-      const gradient = getProjectVisual(item.name);
-      
-      return (
-        <div
-          className="card shadow-xl hover:shadow-2xl transition-all duration-300 bg-base-100 cursor-pointer hover:-translate-y-1 overflow-hidden group"
-          key={index}
-          onClick={(e) => {
-            e.preventDefault();
+  return githubProjects.map((item, index) => {
+    const visual = getProjectVisual(item.name);
 
-            try {
-              if (googleAnalyticsId) {
-                ga.event('Click project', {
-                  project: item.name,
-                });
-              }
-            } catch (error) {
-              console.error(error);
+    return (
+      <div
+        className="card shadow-xl hover:shadow-2xl transition-all duration-300 bg-base-100 cursor-pointer hover:-translate-y-1 overflow-hidden group"
+        key={index}
+        onClick={(e) => {
+          e.preventDefault();
+          try {
+            if (googleAnalyticsId) {
+              ga.event('Click project', { project: item.name });
             }
-
-            window?.open(item.html_url, '_blank');
-          }}
+          } catch (error) {
+            console.error(error);
+          }
+          window?.open(item.html_url, '_blank');
+        }}
+      >
+        {/* Visual Header - Gradient or Image */}
+        <div
+          className="relative h-32 overflow-hidden"
+          style={
+            visual.type === 'image'
+              ? {
+                  backgroundImage: `url(${visual.value})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }
+              : undefined
+          }
         >
-          {/* Visual Header - Gradient or Image */}
-          <div className={`relative h-32 bg-gradient-to-br ${gradient} overflow-hidden`}>
-            <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <FaGithub className="text-white text-5xl opacity-40 group-hover:opacity-60 transition-opacity duration-300" />
-            </div>
-            {/* Language badge on image */}
-            {item.language && (
-              <div className="absolute top-3 right-3 flex items-center gap-2 bg-base-100 bg-opacity-90 px-3 py-1 rounded-full shadow-md">
-                <div
-                  className="w-2.5 h-2.5 rounded-full"
-                  style={{ backgroundColor: getLanguageColor(item.language) }}
-                />
-                <span className="text-xs font-semibold text-base-content">{item.language}</span>
-              </div>
-            )}
+          {/* Gradient overlay if needed */}
+          {visual.type === 'gradient' && (
+            <div className={`absolute inset-0 bg-gradient-to-br ${visual.value}`}></div>
+          )}
+
+          {/* Dark overlay + Github icon */}
+          <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <FaGithub className="text-white text-5xl opacity-40 group-hover:opacity-60 transition-opacity duration-300" />
           </div>
 
-          <div className="card-body">
-            {/* Project Title */}
-            <h2 className="card-title text-lg flex items-center justify-between text-base-content hover:text-primary transition-colors mb-2">
-              <span className="truncate">{item.name}</span>
-              <FaExternalLinkAlt className="text-xs flex-shrink-0 opacity-50" />
-            </h2>
+          {/* Language badge */}
+          {item.language && (
+            <div className="absolute top-3 right-3 flex items-center gap-2 bg-base-100 bg-opacity-90 px-3 py-1 rounded-full shadow-md">
+              <div
+                className="w-2.5 h-2.5 rounded-full"
+                style={{ backgroundColor: getLanguageColor(item.language) }}
+              />
+              <span className="text-xs font-semibold text-base-content">{item.language}</span>
+            </div>
+          )}
+        </div>
 
-            {/* Description */}
-            {item.description && (
-              <p className="text-base-content opacity-70 text-sm leading-relaxed mb-4 line-clamp-2">
-                {item.description}
-              </p>
-            )}
+        {/* Card body */}
+        <div className="card-body">
+          {/* Project Title */}
+          <h2 className="card-title text-lg flex items-center justify-between text-base-content hover:text-primary transition-colors mb-2">
+            <span className="truncate">{item.name}</span>
+            <FaExternalLinkAlt className="text-xs flex-shrink-0 opacity-50" />
+          </h2>
 
-            {/* Keywords/Topics */}
-            {item.topics && item.topics.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-4">
-                {item.topics.slice(0, 5).map((topic, topicIndex) => (
-                  <span
-                    key={topicIndex}
-                    className="badge badge-sm bg-primary bg-opacity-10 text-primary border-primary border-opacity-20 font-medium"
-                  >
-                    {topic}
-                  </span>
-                ))}
-                {item.topics.length > 5 && (
-                  <span className="badge badge-sm badge-ghost">
-                    +{item.topics.length - 5} more
-                  </span>
-                )}
-              </div>
-            )}
+          {/* Description */}
+          {item.description && (
+            <p className="text-base-content opacity-70 text-sm leading-relaxed mb-4 line-clamp-2">
+              {item.description}
+            </p>
+          )}
 
-            {/* Stats Bar */}
-            <div className="flex items-center gap-4 pt-4 border-t border-base-300 mt-auto">
-              <div className="flex items-center gap-2 text-base-content">
-                <AiOutlineStar className="text-yellow-500 text-lg" />
-                <span className="text-sm font-semibold">{item.stargazers_count}</span>
-              </div>
-              <div className="flex items-center gap-2 text-base-content">
-                <AiOutlineFork className="text-blue-500 text-lg" />
-                <span className="text-sm font-semibold">{item.forks_count}</span>
-              </div>
+          {/* Topics/Keywords */}
+          {item.topics && item.topics.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-4">
+              {item.topics.slice(0, 5).map((topic, topicIndex) => (
+                <span
+                  key={topicIndex}
+                  className="badge badge-sm bg-primary bg-opacity-10 text-primary border-primary border-opacity-20 font-medium"
+                >
+                  {topic}
+                </span>
+              ))}
+              {item.topics.length > 5 && (
+                <span className="badge badge-sm badge-ghost">
+                  +{item.topics.length - 5} more
+                </span>
+              )}
+            </div>
+          )}
+
+          {/* Stats */}
+          <div className="flex items-center gap-4 pt-4 border-t border-base-300 mt-auto">
+            <div className="flex items-center gap-2 text-base-content">
+              <AiOutlineStar className="text-yellow-500 text-lg" />
+              <span className="text-sm font-semibold">{item.stargazers_count}</span>
+            </div>
+            <div className="flex items-center gap-2 text-base-content">
+              <AiOutlineFork className="text-blue-500 text-lg" />
+              <span className="text-sm font-semibold">{item.forks_count}</span>
             </div>
           </div>
         </div>
-      );
-    });
-  };
+      </div>
+    );
+  });
+};
+
 
   return (
     <Fragment>
