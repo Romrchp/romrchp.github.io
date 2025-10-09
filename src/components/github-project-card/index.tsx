@@ -4,7 +4,8 @@ import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { ga, getLanguageColor, skeleton } from '../../utils';
 import { GithubProject } from '../../interfaces/github-project';
 
-import CONFIG_JSON from '../../../gitprofile.config.json';
+// Import only the images JSON
+import IMAGES from '../../../gitprofile-images.json';
 
 const GithubProjectCard = ({
   header,
@@ -23,27 +24,30 @@ const GithubProjectCard = ({
 }) => {
   if (!loading && githubProjects.length === 0) return null;
 
+  // Helper function to get project visual (image or gradient)
   const getProjectVisual = (projectName: string) => {
-  const imageMap: Record<string, string> = CONFIG_JSON.projects.github.images || {};
+    const imageMap: Record<string, string> = IMAGES;
 
-  if (imageMap[projectName]) {
-    return { type: 'image', value: imageMap[projectName] };
-  }
+    // Return image if found
+    if (imageMap[projectName]) {
+      return { type: 'image' as const, value: imageMap[projectName] };
+    }
 
-  // Otherwise, return a gradient fallback
-  const gradients = [
-    'from-blue-500 to-cyan-500',
-    'from-purple-500 to-pink-500',
-    'from-green-500 to-emerald-500',
-    'from-orange-500 to-red-500',
-    'from-indigo-500 to-purple-500',
-    'from-yellow-500 to-orange-500',
-  ];
+    // Fallback to gradient
+    const gradients = [
+      'from-blue-500 to-cyan-500',
+      'from-purple-500 to-pink-500',
+      'from-green-500 to-emerald-500',
+      'from-orange-500 to-red-500',
+      'from-indigo-500 to-purple-500',
+      'from-yellow-500 to-orange-500',
+    ];
 
-  const index = projectName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  return { type: 'gradient', value: gradients[index % gradients.length] };
-};
-
+    const index = projectName
+      .split('')
+      .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return { type: 'gradient' as const, value: gradients[index % gradients.length] };
+  };
 
   const renderSkeleton = () => {
     const array = [];
@@ -53,11 +57,9 @@ const GithubProjectCard = ({
           <div className="flex justify-between flex-col p-8 h-full w-full">
             <div>
               <div className="flex items-center">
-                <span>
-                  <h5 className="card-title text-lg">
-                    {skeleton({ widthCls: 'w-32', heightCls: 'h-8', className: 'mb-1' })}
-                  </h5>
-                </span>
+                <h5 className="card-title text-lg">
+                  {skeleton({ widthCls: 'w-32', heightCls: 'h-8', className: 'mb-1' })}
+                </h5>
               </div>
               <div className="mb-5 mt-1">
                 {skeleton({ widthCls: 'w-full', heightCls: 'h-4', className: 'mb-2' })}
@@ -92,7 +94,7 @@ const GithubProjectCard = ({
         >
           {/* Visual Header */}
           <div
-            className={`relative h-32 overflow-hidden`}
+            className="relative h-32 overflow-hidden"
             style={
               visual.type === 'image'
                 ? { backgroundImage: `url(${visual.value})`, backgroundSize: 'cover', backgroundPosition: 'center' }
@@ -140,7 +142,9 @@ const GithubProjectCard = ({
                     {topic}
                   </span>
                 ))}
-                {item.topics.length > 5 && <span className="badge badge-sm badge-ghost">+{item.topics.length - 5} more</span>}
+                {item.topics.length > 5 && (
+                  <span className="badge badge-sm badge-ghost">+{item.topics.length - 5} more</span>
+                )}
               </div>
             )}
 
@@ -190,7 +194,9 @@ const GithubProjectCard = ({
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">{loading ? renderSkeleton() : renderProjects()}</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {loading ? renderSkeleton() : renderProjects()}
+            </div>
           </div>
         </div>
       </div>
