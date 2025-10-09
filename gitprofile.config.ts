@@ -11,55 +11,44 @@ const CONFIG = {
    */
   base: '/',
   projects: {
-    github: {
-      display: true, // Display GitHub projects?
-      header: 'My Projects',
-      mode: 'automatic', // Mode can be: 'automatic' or 'manual'
-      automatic: {
-        sortBy: 'stars', // Sort projects by 'stars' or 'updated'
-        limit: 8, // How many projects to display.
-        exclude: {
-          forks: true, // Forked projects will not be displayed if set to true.
-          projects: ['romrchp/graded-exs', 'romrchp/optml-project', 'romrchp/dgrpool-pipeline'], // These projects will not be displayed. example: ['arifszn/my-project1', 'arifszn/my-project2']
-        },
-      },
-      images: {
-        'directors-analysis': 'https://i.postimg.cc/grFxCtVj/director.jpg',
-        'csa-journey-planner': 'https://i.postimg.cc/q7hSDmvb/zurich.jpg',
-        'personalised-reminders-rct': 'https://i.postimg.cc/PqYK80xH/food-tracking.jpg',
-        'chambolle-denoising': 'https://i.postimg.cc/3RyS993r/image-denoising.png',
-        'pully-weather-forecast': 'https://i.postimg.cc/15zgddLc/high-angle-closeup-shot-isolated-green-leaf-puddle-rainy-day.jpg',
-        'utae-cell-segmentation': 'https://i.postimg.cc/V6yGGnv5/cell-segmentation.png',
+  github: {
+    display: true,
+    header: 'My Projects',
+    mode: 'automatic',
+    automatic: {
+      sortBy: 'stars',
+      limit: 8,
+      exclude: {
+        forks: true,
+        projects: ['romrchp/graded-exs', 'romrchp/optml-project', 'romrchp/dgrpool-pipeline'],
       },
     },
-      manual: {
-        // Properties for manually specifying projects
-        projects: ['arifszn/gitprofile', 'arifszn/pandora'], // List of repository names to display. example: ['arifszn/my-project1', 'arifszn/my-project2']
-      },
+    images: {
+      'directors-analysis': 'https://i.postimg.cc/grFxCtVj/director.jpg',
+      'csa-journey-planner': 'https://i.postimg.cc/q7hSDmvb/zurich.jpg',
+      'personalised-reminders-rct': 'https://i.postimg.cc/PqYK80xH/food-tracking.jpg',
+      'chambolle-denoising': 'https://i.postimg.cc/3RyS993r/image-denoising.png',
+      'pully-weather-forecast': 'https://i.postimg.cc/15zgddLc/high-angle-closeup-shot-isolated-green-leaf-puddle-rainy-day.jpg',
+      'utae-cell-segmentation': 'https://i.postimg.cc/V6yGGnv5/cell-segmentation.png',
     },
-    external: {
-      header: 'Others',
-      // To hide the `External Projects` section, keep it empty.
-      projects: [
-        {
-          title: 'DGRPool',
-          description:
-            'Functional web tool of the DGRPool project. Code for the data retrieval automation pipeline can be provided upon request, feel free to ask.',
-          imageUrl:
-            'https://i.postimg.cc/ydY4yvFK/DGRPool.png',
-          link: 'https://dgrpool.epfl.ch/',
-        },
-       // {
-       //   title: 'Project Name',
-        //  description:
-        //    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
-        //  imageUrl:
-        //    'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg',
-        //  link: 'https://example.com',
-       // },
-      ],
+    manual: {
+      projects: ['arifszn/gitprofile', 'arifszn/pandora'],
     },
   },
+  external: {
+    header: 'Others',
+    projects: [
+      {
+        title: 'DGRPool',
+        description:
+          'Functional web tool of the DGRPool project. Code for the data retrieval automation pipeline can be provided upon request, feel free to ask.',
+        imageUrl: 'https://i.postimg.cc/ydY4yvFK/DGRPool.png',
+        link: 'https://dgrpool.epfl.ch/',
+      },
+    ],
+  },
+},
+
   seo: {
     title: 'Romain Rochepeau\'s portfolio',
     description: '',
