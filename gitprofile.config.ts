@@ -76,7 +76,7 @@ const CONFIG = {
     telegram: '',
     website: '',
     phone: '+33 6 47 87 35 73',
-    email: 'romain.rochepeau@epfl.ch',
+    email: 'romainrochepeau@orange.fr',
   },
   resume: {
     fileUrl:
