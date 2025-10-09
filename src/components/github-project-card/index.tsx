@@ -4,6 +4,8 @@ import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { ga, getLanguageColor, skeleton } from '../../utils';
 import { GithubProject } from '../../interfaces/github-project';
 
+import CONFIG_JSON from '../../../gitprofile.config.json';
+
 const GithubProjectCard = ({
   header,
   githubProjects,
@@ -21,22 +23,14 @@ const GithubProjectCard = ({
 }) => {
   if (!loading && githubProjects.length === 0) return null;
 
-  // Load config images
-  let imageMap: Record<string, string> = {};
-  try {
-    const config = require('../../../gitprofile.config').default;
-    imageMap = config.projects.github.images || {};
-    console.log('Loaded config images:', imageMap);
-  } catch (e) {
-    console.warn('Config file not loaded:', e);
-  }
-
-  // Helper: get image or gradient
+  // Helper function to get project image or fallback to gradient
   const getProjectVisual = (projectName: string) => {
-    const key = projectName.toLowerCase();
-    if (imageMap[key]) return { type: 'image', value: imageMap[key] };
+    const imageMap = CONFIG_JSON.projects.github.images || {};
 
-    // fallback gradient
+    if (imageMap[projectName]) {
+      return { type: 'image', value: imageMap[projectName] };
+    }
+
     const gradients = [
       'from-blue-500 to-cyan-500',
       'from-purple-500 to-pink-500',
@@ -45,9 +39,8 @@ const GithubProjectCard = ({
       'from-indigo-500 to-purple-500',
       'from-yellow-500 to-orange-500',
     ];
-    const index = projectName
-      .split('')
-      .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
+    const index = projectName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     return { type: 'gradient', value: gradients[index % gradients.length] };
   };
 
@@ -70,24 +63,21 @@ const GithubProjectCard = ({
               </div>
             </div>
           </div>
-        </div>,
+        </div>
       );
     }
     return array;
   };
 
   const renderProjects = () => {
-    console.log('Rendering projects:', githubProjects.map(p => p.name));
-
     return githubProjects.map((item, index) => {
       const visual = getProjectVisual(item.name);
-      console.log(item.name, visual);
 
       return (
         <div
           className="card shadow-xl hover:shadow-2xl transition-all duration-300 bg-base-100 cursor-pointer hover:-translate-y-1 overflow-hidden group"
           key={index}
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             try {
               if (googleAnalyticsId) {
@@ -101,17 +91,21 @@ const GithubProjectCard = ({
         >
           {/* Visual Header */}
           <div
-            className={`relative h-32 overflow-hidden ${
-              visual.type === 'gradient' ? `bg-gradient-to-br ${visual.value}` : ''
-            }`}
-            style={visual.type === 'image' ? { backgroundImage: `url(${visual.value})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
+            className={`relative h-32 overflow-hidden`}
+            style={
+              visual.type === 'image'
+                ? { backgroundImage: `url(${visual.value})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+                : {}
+            }
           >
+            {visual.type === 'gradient' && (
+              <div className={`absolute inset-0 bg-gradient-to-br ${visual.value}`}></div>
+            )}
             <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
             <div className="absolute inset-0 flex items-center justify-center">
               <FaGithub className="text-white text-5xl opacity-40 group-hover:opacity-60 transition-opacity duration-300" />
             </div>
 
-            {/* Language badge */}
             {item.language && (
               <div className="absolute top-3 right-3 flex items-center gap-2 bg-base-100 bg-opacity-90 px-3 py-1 rounded-full shadow-md">
                 <div
@@ -123,15 +117,18 @@ const GithubProjectCard = ({
             )}
           </div>
 
-          {/* Card body */}
           <div className="card-body">
             <h2 className="card-title text-lg flex items-center justify-between text-base-content hover:text-primary transition-colors mb-2">
               <span className="truncate">{item.name}</span>
               <FaExternalLinkAlt className="text-xs flex-shrink-0 opacity-50" />
             </h2>
+
             {item.description && (
-              <p className="text-base-content opacity-70 text-sm leading-relaxed mb-4 line-clamp-2">{item.description}</p>
+              <p className="text-base-content opacity-70 text-sm leading-relaxed mb-4 line-clamp-2">
+                {item.description}
+              </p>
             )}
+
             {item.topics && item.topics.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
                 {item.topics.slice(0, 5).map((topic, topicIndex) => (
@@ -142,9 +139,7 @@ const GithubProjectCard = ({
                     {topic}
                   </span>
                 ))}
-                {item.topics.length > 5 && (
-                  <span className="badge badge-sm badge-ghost">+{item.topics.length - 5} more</span>
-                )}
+                {item.topics.length > 5 && <span className="badge badge-sm badge-ghost">+{item.topics.length - 5} more</span>}
               </div>
             )}
 
@@ -194,9 +189,7 @@ const GithubProjectCard = ({
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {loading ? renderSkeleton() : renderProjects()}
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">{loading ? renderSkeleton() : renderProjects()}</div>
           </div>
         </div>
       </div>
