@@ -177,7 +177,7 @@ const GithubProjectCard = ({
             <div className="flex items-center justify-between mb-8">
               <div>
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-2 h-10 bg-gradient-to-b from-green-500 to-blue-500 rounded-full"></div>
+                  <div className="w-2 h-10 bg-gradient-to-b from-sky-400 via-blue-500 to-indigo-600 rounded-full"></div>
                   <h5 className="text-4xl font-bold text-base-content">
                     {loading ? skeleton({ widthCls: 'w-40', heightCls: 'h-8' }) : header}
                   </h5>
