@@ -24,12 +24,12 @@ import ExternalProjectCard from './external-project-card';
 import BlogCard from './blog-card';
 import Footer from './footer';
 import PublicationCard from './publication-card';
-import AvatarCard from './avatar-card';
+/*import AvatarCard from './avatar-card';
 import DetailsCard from './details-card';
 import SkillCard from './skill-card';
 import ExperienceCard from './experience-card';
 import EducationCard from './education-card';
-import CertificationCard from './certification-card';
+import CertificationCard from './certification-card';}*/
 
 const GitProfile = ({ config }: { config: Config }) => {
   const [sanitizedConfig] = useState<SanitizedConfig | Record<string, never>>(
