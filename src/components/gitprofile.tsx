@@ -40,6 +40,7 @@ const GitProfile = ({ config }: { config: Config }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [githubProjects, setGithubProjects] = useState<GithubProject[]>([]);
+  const [emailOpen, setEmailOpen] = useState(false); // toggle for email display
 
   const getGithubProjects = useCallback(
     async (publicRepoCount: number): Promise<GithubProject[]> => {
@@ -58,26 +59,26 @@ const GitProfile = ({ config }: { config: Config }) => {
           headers: { 'Content-Type': 'application/vnd.github.v3+json' },
         });
         return repoResponse.data.items;
-      } else {// manual mode (fix order)
-      const projects = sanitizedConfig.projects.github.manual.projects;
-      if (projects.length === 0) return [];
+      } else {
+        const projects = sanitizedConfig.projects.github.manual.projects;
+        if (projects.length === 0) return [];
 
-      const results: GithubProject[] = [];
+        const results: GithubProject[] = [];
 
-      for (const project of projects) {
-        try {
-          const res = await axios.get(`https://api.github.com/repos/${project}`, {
-            headers: { 'Content-Type': 'application/vnd.github.v3+json' },
-          });
-          results.push(res.data);
-        } catch (err) {
-          console.error(`Error fetching ${project}:`, err);
+        for (const project of projects) {
+          try {
+            const res = await axios.get(`https://api.github.com/repos/${project}`, {
+              headers: { 'Content-Type': 'application/vnd.github.v3+json' },
+            });
+            results.push(res.data);
+          } catch (err) {
+            console.error(`Error fetching ${project}:`, err);
+          }
         }
-      }
 
-      return results;
-    }
-  },
+        return results;
+      }
+    },
     [sanitizedConfig],
   );
 
@@ -164,18 +165,20 @@ const GitProfile = ({ config }: { config: Config }) => {
               {/* Hero Section */}
               <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content text-center">
-                  <div className="max-w-4xl">
-                    <div className="absolute top-4 right-4">
-                      {!sanitizedConfig.themeConfig.disableSwitch && (
+                  <div className="max-w-4xl relative">
+                    {/* Theme Switcher */}
+                    {!sanitizedConfig.themeConfig.disableSwitch && (
+                      <div className="absolute top-4 right-4">
                         <ThemeChanger
                           theme={theme}
                           setTheme={setTheme}
                           loading={loading}
                           themeConfig={sanitizedConfig.themeConfig}
                         />
-                      )}
-                    </div>
+                      </div>
+                    )}
 
+                    {/* Avatar */}
                     {profile && (
                       <div className="avatar mb-8">
                         <div className="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
@@ -184,6 +187,7 @@ const GitProfile = ({ config }: { config: Config }) => {
                       </div>
                     )}
 
+                    {/* Welcome Text */}
                     <h1 className="text-5xl font-bold mb-4 text-base-content">
                       Welcome to my Portfolio 👋
                     </h1>
@@ -205,23 +209,26 @@ const GitProfile = ({ config }: { config: Config }) => {
                       Explore my GitHub projects, publications, and more below.
                     </p>
 
-                    <div className="flex justify-center gap-4 mb-8 flex-wrap">
+                    {/* Contact Buttons */}
+                    <div className="flex justify-center gap-4 mb-8 flex-wrap relative">
                       {sanitizedConfig.social.email && (
-                        <a
-                          href={`mailto:${sanitizedConfig.social.email}`}
-                          className="btn btn-outline btn-sm"
-                        >
-                          Email Me
-                        </a>
+                        <div className="relative">
+                          <button
+                            className="btn btn-outline btn-sm"
+                            onClick={() => setEmailOpen(!emailOpen)}
+                          >
+                            Email Me
+                          </button>
+                          <div
+                            className={`absolute left-1/2 -translate-x-1/2 mt-2 bg-base-100 text-base-content text-sm rounded-md shadow-lg p-2 whitespace-nowrap border border-base-300 z-10 transition-opacity duration-300 ${
+                              emailOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                            }`}
+                          >
+                            {sanitizedConfig.social.email}
+                          </div>
+                        </div>
                       )}
-                      {sanitizedConfig.social.phone && (
-                        <a
-                          href={`tel:${sanitizedConfig.social.phone}`}
-                          className="btn btn-outline btn-sm"
-                        >
-                          Call Me
-                        </a>
-                      )}
+
                       <a
                         href={`https://github.com/${sanitizedConfig.github.username}`}
                         target="_blank"
