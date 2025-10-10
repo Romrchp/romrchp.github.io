@@ -98,10 +98,10 @@ const ExternalProjectCard = ({
             </div>
           </figure>
         ) : (
-          // Gradient placeholder if no image
-          <div className="relative h-52 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center">
-            <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-            <FaLaptopCode className="text-white text-6xl opacity-60 relative z-10" />
+          // Light gradient placeholder if no image
+          <div className="relative h-52 bg-base-100 flex items-center justify-center rounded-lg border border-base-200 overflow-hidden">
+            <div className="absolute inset-0 bg-white"></div>
+            <FaLaptopCode className="text-gray-400 text-6xl opacity-60 relative z-10" />
           </div>
         )}
 
