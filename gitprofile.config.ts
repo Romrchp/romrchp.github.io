@@ -41,9 +41,6 @@ const CONFIG = {
       'pully-weather-forecast': 'https://i.postimg.cc/15zgddLc/high-angle-closeup-shot-isolated-green-leaf-puddle-rainy-day.jpg',
       'utae-cell-segmentation': 'https://i.postimg.cc/V6yGGnv5/cell-segmentation.png',
     },
-    manual: {
-      projects: ['arifszn/gitprofile', 'arifszn/pandora'],
-    },
   },
   external: {
     header: 'Others',
