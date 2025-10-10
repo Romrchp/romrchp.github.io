@@ -17,19 +17,19 @@ import HeadTagEditor from './head-tag-editor';
 import { DEFAULT_THEMES } from '../constants/default-themes';
 import ThemeChanger from './theme-changer';
 import { BG_COLOR } from '../constants';
-import AvatarCard from './avatar-card';
 import { Profile } from '../interfaces/profile';
-import DetailsCard from './details-card';
-import SkillCard from './skill-card';
-import ExperienceCard from './experience-card';
-import EducationCard from './education-card';
-import CertificationCard from './certification-card';
 import { GithubProject } from '../interfaces/github-project';
 import GithubProjectCard from './github-project-card';
 import ExternalProjectCard from './external-project-card';
 import BlogCard from './blog-card';
 import Footer from './footer';
 import PublicationCard from './publication-card';
+import AvatarCard from './avatar-card';
+import DetailsCard from './details-card';
+import SkillCard from './skill-card';
+import ExperienceCard from './experience-card';
+import EducationCard from './education-card';
+import CertificationCard from './certification-card';
 
 const GitProfile = ({ config }: { config: Config }) => {
   const [sanitizedConfig] = useState<SanitizedConfig | Record<string, never>>(
@@ -40,7 +40,7 @@ const GitProfile = ({ config }: { config: Config }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [githubProjects, setGithubProjects] = useState<GithubProject[]>([]);
-  const [emailOpen, setEmailOpen] = useState(false); // toggle for email display
+  const [emailOpen, setEmailOpen] = useState(false);
 
   const getGithubProjects = useCallback(
     async (publicRepoCount: number): Promise<GithubProject[]> => {
@@ -64,7 +64,6 @@ const GitProfile = ({ config }: { config: Config }) => {
         if (projects.length === 0) return [];
 
         const results: GithubProject[] = [];
-
         for (const project of projects) {
           try {
             const res = await axios.get(`https://api.github.com/repos/${project}`, {
@@ -75,7 +74,6 @@ const GitProfile = ({ config }: { config: Config }) => {
             console.error(`Error fetching ${project}:`, err);
           }
         }
-
         return results;
       }
     },
@@ -85,7 +83,6 @@ const GitProfile = ({ config }: { config: Config }) => {
   const loadData = useCallback(async () => {
     try {
       setLoading(true);
-
       const response = await axios.get(
         `https://api.github.com/users/${sanitizedConfig.github.username}`,
       );
@@ -283,6 +280,8 @@ const GitProfile = ({ config }: { config: Config }) => {
                       blog={sanitizedConfig.blog}
                     />
                   )}
+                </div>
+              </div>
 
               {/* Footer */}
               {sanitizedConfig.footer && (
