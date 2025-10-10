@@ -58,21 +58,26 @@ const GitProfile = ({ config }: { config: Config }) => {
           headers: { 'Content-Type': 'application/vnd.github.v3+json' },
         });
         return repoResponse.data.items;
-      } else {
-        if (sanitizedConfig.projects.github.manual.projects.length === 0) return [];
+      } else {// manual mode (fix order)
+      const projects = sanitizedConfig.projects.github.manual.projects;
+      if (projects.length === 0) return [];
 
-        const repos = sanitizedConfig.projects.github.manual.projects
-          .map((project) => `+repo:${project}`)
-          .join('');
+      const results: GithubProject[] = [];
 
-        const url = `https://api.github.com/search/repositories?q=${repos}+fork:true&type=Repositories`;
-
-        const repoResponse = await axios.get(url, {
-          headers: { 'Content-Type': 'application/vnd.github.v3+json' },
-        });
-        return repoResponse.data.items;
+      for (const project of projects) {
+        try {
+          const res = await axios.get(`https://api.github.com/repos/${project}`, {
+            headers: { 'Content-Type': 'application/vnd.github.v3+json' },
+          });
+          results.push(res.data);
+        } catch (err) {
+          console.error(`Error fetching ${project}:`, err);
+        }
       }
-    },
+
+      return results;
+    }
+  },
     [sanitizedConfig],
   );
 
