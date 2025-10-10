@@ -14,7 +14,17 @@ const CONFIG = {
   github: {
     display: true,
     header: 'My Projects',
-    mode: 'automatic',
+    mode: 'manual',
+    manual: {
+      projects: [
+        'romrchp/personalised-reminders-rct',
+        'romrchp/utae-cell-segmentation',
+        'romrchp/csa-journey-planner',
+        'romrchp/directors-analysis',
+        'romrchp/chambolle-denoising',
+        'romrchp/pully-weather-forecast'
+        ],
+    },
     automatic: {
       sortBy: 'stars',
       limit: 8,
