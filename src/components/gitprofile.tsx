@@ -284,64 +284,6 @@ const GitProfile = ({ config }: { config: Config }) => {
                     />
                   )}
 
-                  {/* About Me */}
-                  <div className="mt-16">
-                    <div className="collapse collapse-arrow bg-base-100 shadow-lg">
-                      <input type="checkbox" />
-                      <div className="collapse-title text-xl font-medium">
-                        More About Me
-                      </div>
-                      <div className="collapse-content">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                          <div className="space-y-6">
-                            <AvatarCard
-                              profile={profile}
-                              loading={loading}
-                              avatarRing={sanitizedConfig.themeConfig.displayAvatarRing}
-                              resumeFileUrl={sanitizedConfig.resume.fileUrl}
-                            />
-                            <DetailsCard
-                              profile={profile}
-                              loading={loading}
-                              github={sanitizedConfig.github}
-                              social={sanitizedConfig.social}
-                            />
-                          </div>
-
-                          {sanitizedConfig.skills.length !== 0 && (
-                            <SkillCard
-                              loading={loading}
-                              skills={sanitizedConfig.skills}
-                            />
-                          )}
-
-                          <div className="space-y-6">
-                            {sanitizedConfig.experiences.length !== 0 && (
-                              <ExperienceCard
-                                loading={loading}
-                                experiences={sanitizedConfig.experiences}
-                              />
-                            )}
-                            {sanitizedConfig.educations.length !== 0 && (
-                              <EducationCard
-                                loading={loading}
-                                educations={sanitizedConfig.educations}
-                              />
-                            )}
-                            {sanitizedConfig.certifications.length !== 0 && (
-                              <CertificationCard
-                                loading={loading}
-                                certifications={sanitizedConfig.certifications}
-                              />
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               {/* Footer */}
               {sanitizedConfig.footer && (
                 <footer
