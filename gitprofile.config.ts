@@ -20,8 +20,8 @@ const CONFIG = {
         'romrchp/personalised-reminders-rct',
         'romrchp/utae-cell-segmentation',
         'romrchp/csa-journey-planner',
-        'romrchp/directors-analysis',
         'romrchp/chambolle-denoising',
+        'romrchp/directors-analysis',
         'romrchp/pully-weather-forecast'
         ],
     },
@@ -48,8 +48,8 @@ const CONFIG = {
       {
         title: 'DGRPool',
         description:
-          'Functional web tool of the DGRPool project. Code for the data retrieval automation pipeline can be provided upon request, feel free to ask.',
-        imageUrl: 'https://i.postimg.cc/ydY4yvFK/DGRPool.png',
+          'Functional web tool of the DGRPool project I participated in. Code for the automated data retrieval pipeline can be provided upon request.',
+        imageUrl: 'https://i.postimg.cc/nLbsZMBB/DGRPool.png',
         link: 'https://dgrpool.epfl.ch/',
       },
     ],
