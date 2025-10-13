@@ -98,7 +98,7 @@ const PublicationCard = ({
 
                 {/* ✨ Updated Subtitle */}
                 <p className="ml-9 mt-1 text-lg font-medium text-base-content/90 tracking-wide leading-relaxed">
-                  Research papers and academic contributions showcasing collaborative and independent work.
+                  Research papers and academic contributions.
                 </p>
               </div>
             </div>

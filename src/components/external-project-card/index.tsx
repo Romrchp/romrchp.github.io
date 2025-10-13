@@ -151,7 +151,7 @@ const ExternalProjectCard = ({
 
                 {/* ✨ Updated Subtitle */}
                 <p className="ml-9 mt-1 text-lg font-medium text-base-content/90 tracking-wide leading-relaxed">
-                  Featured projects and web applications developed beyond my academic work.
+                  Other additional featured projects and web applications.
                 </p>
               </div>
             </div>
