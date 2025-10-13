@@ -183,13 +183,10 @@ const GithubProjectCard = ({
                     {loading ? skeleton({ widthCls: 'w-40', heightCls: 'h-8' }) : header}
                   </h5>
                 </div>
-
-                {/* Refined Subtitle */}
-                <p className="ml-9 mt-1 text-base-content/70 text-base italic tracking-wide leading-snug">
-                  A selection of projects from my academic journey — where theory and experimentation meet.
+                <p className="ml-9 mt-1 text-lg font-medium text-base-content/90 tracking-wide leading-relaxed">
+                  A selection of projects conducted during my academic journey, blending theory and practice.
                 </p>
               </div>
-
               {!loading && (
                 <a
                   href={`https://github.com/${username}?tab=repositories`}
