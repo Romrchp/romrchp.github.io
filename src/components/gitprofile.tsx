@@ -24,12 +24,6 @@ import ExternalProjectCard from './external-project-card';
 import BlogCard from './blog-card';
 import Footer from './footer';
 import PublicationCard from './publication-card';
-/*import AvatarCard from './avatar-card';
-import DetailsCard from './details-card';
-import SkillCard from './skill-card';
-import ExperienceCard from './experience-card';
-import EducationCard from './education-card';
-import CertificationCard from './certification-card';}*/
 
 const GitProfile = ({ config }: { config: Config }) => {
   const [sanitizedConfig] = useState<SanitizedConfig | Record<string, never>>(
@@ -41,6 +35,7 @@ const GitProfile = ({ config }: { config: Config }) => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [githubProjects, setGithubProjects] = useState<GithubProject[]>([]);
   const [emailOpen, setEmailOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const getGithubProjects = useCallback(
     async (publicRepoCount: number): Promise<GithubProject[]> => {
@@ -147,6 +142,12 @@ const GitProfile = ({ config }: { config: Config }) => {
     } else setError(GENERIC_ERROR);
   };
 
+  const handleCopyEmail = (email: string) => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <HelmetProvider>
       <div className="fade-in min-h-screen">
@@ -192,7 +193,7 @@ const GitProfile = ({ config }: { config: Config }) => {
                     {profile && (
                       <>
                         <h2 className="text-3xl font-semibold mb-4 text-base-content opacity-80">
-                          {profile.name}
+                          {profile.name}, Life Sciences Engineer - EPFL 2025 Graduate
                         </h2>
                         {profile.bio && (
                           <p className="text-xl mb-6 text-base-content opacity-70">
@@ -203,7 +204,7 @@ const GitProfile = ({ config }: { config: Config }) => {
                     )}
 
                     <p className="text-lg mb-8 text-base-content opacity-60">
-                      Explore my GitHub projects, publications, and more below.
+                      Explore my projects, publications, and more below!
                     </p>
 
                     {/* Contact Buttons */}
@@ -211,17 +212,41 @@ const GitProfile = ({ config }: { config: Config }) => {
                       {sanitizedConfig.social.email && (
                         <div className="relative">
                           <button
-                            className="btn btn-outline btn-sm"
+                            className="btn btn-outline btn-sm transition-transform hover:scale-105"
                             onClick={() => setEmailOpen(!emailOpen)}
                           >
                             Email Me
                           </button>
+
+                          {/* Floating Email Card */}
                           <div
-                            className={`absolute left-1/2 -translate-x-1/2 mt-2 bg-base-100 text-base-content text-sm rounded-md shadow-lg p-2 whitespace-nowrap border border-base-300 z-10 transition-opacity duration-300 ${
-                              emailOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                            className={`absolute left-1/2 -translate-x-1/2 mt-3 bg-base-100/90 backdrop-blur-md text-base-content rounded-2xl shadow-xl border border-base-300 px-4 py-3 w-64 transition-all duration-300 ${
+                              emailOpen
+                                ? 'opacity-100 visible translate-y-0'
+                                : 'opacity-0 invisible -translate-y-2'
                             }`}
                           >
-                            {sanitizedConfig.social.email}
+                            <p className="text-sm font-medium text-center mb-2 break-all">
+                              {sanitizedConfig.social.email}
+                            </p>
+
+                            {/* Buttons */}
+                            <div className="flex justify-center gap-2">
+                              <button
+                                className="btn btn-xs btn-primary"
+                                onClick={() =>
+                                  handleCopyEmail(sanitizedConfig.social.email)
+                                }
+                              >
+                                {copied ? 'Copied!' : 'Copy'}
+                              </button>
+                              <a
+                                href={`mailto:${sanitizedConfig.social.email}`}
+                                className="btn btn-xs btn-outline"
+                              >
+                                Compose
+                              </a>
+                            </div>
                           </div>
                         </div>
                       )}
@@ -230,7 +255,7 @@ const GitProfile = ({ config }: { config: Config }) => {
                         href={`https://github.com/${sanitizedConfig.github.username}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="btn btn-outline btn-sm"
+                        className="btn btn-outline btn-sm transition-transform hover:scale-105"
                       >
                         GitHub Profile
                       </a>
