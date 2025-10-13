@@ -185,8 +185,8 @@ const GithubProjectCard = ({
                 </div>
 
                 {/* Refined Subtitle */}
-                <p className="ml-9 mt-1 text-base-content/70 text-sm italic tracking-wide leading-snug">
-                  A selection of projects from my academic journey — where theory and practice blend.
+                <p className="ml-9 mt-1 text-base-content/70 text-base italic tracking-wide leading-snug">
+                  A selection of projects from my academic journey — where theory and experimentation meet.
                 </p>
               </div>
 
