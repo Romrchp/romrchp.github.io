@@ -174,17 +174,19 @@ const GithubProjectCard = ({
       <div className="col-span-1 lg:col-span-2">
         <div className="grid grid-cols-1 gap-6">
           <div className="col-span-1">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-10">
               <div>
-                <div className="flex items-center gap-3 mb-3">
+                {/* Section Header */}
+                <div className="flex items-center gap-3 mb-2">
                   <div className="w-2 h-10 bg-gradient-to-b from-sky-400 via-blue-500 to-indigo-600 rounded-full"></div>
                   <h5 className="text-4xl font-bold text-base-content tracking-tight">
                     {loading ? skeleton({ widthCls: 'w-40', heightCls: 'h-8' }) : header}
                   </h5>
                 </div>
 
-                <p className="ml-9 text-lg font-medium text-base-content/80 italic tracking-wide leading-snug">
-                  A selection of projects conducted during my academic journey, blending theory and practice.
+                {/* Refined Subtitle */}
+                <p className="ml-9 mt-1 text-base-content/70 text-sm italic tracking-wide leading-snug">
+                  A selection of projects from my academic journey — where theory and practice blend.
                 </p>
               </div>
 
@@ -201,8 +203,8 @@ const GithubProjectCard = ({
               )}
             </div>
 
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Project Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {loading ? renderSkeleton() : renderProjects()}
             </div>
           </div>
