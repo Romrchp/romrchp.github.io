@@ -13,7 +13,7 @@ const CONFIG = {
   projects: {
   github: {
     display: true,
-    header: 'My Projects',
+    header: 'Academic projects',
     mode: 'manual',
     manual: {
       projects: [
@@ -49,7 +49,7 @@ const CONFIG = {
         title: 'DGRPool',
         description:
           'Functional web tool of the DGRPool project I participated in. Code for the automated data retrieval pipeline can be provided upon request.',
-        imageUrl: 'https://i.postimg.cc/nLbsZMBB/DGRPool.png',
+        imageUrl: 'https://i.postimg.cc/Lsc0tGpY/DGRPool.png',
         link: 'https://dgrpool.epfl.ch/',
       },
     ],

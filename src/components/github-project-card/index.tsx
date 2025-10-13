@@ -176,16 +176,18 @@ const GithubProjectCard = ({
           <div className="col-span-1">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-3 mb-3">
                   <div className="w-2 h-10 bg-gradient-to-b from-sky-400 via-blue-500 to-indigo-600 rounded-full"></div>
-                  <h5 className="text-4xl font-bold text-base-content">
+                  <h5 className="text-4xl font-bold text-base-content tracking-tight">
                     {loading ? skeleton({ widthCls: 'w-40', heightCls: 'h-8' }) : header}
                   </h5>
                 </div>
-                <p className="text-base-content opacity-60 ml-9 text-lg">
-                  Open source projects and code repositories
+
+                <p className="ml-9 text-lg font-medium text-base-content/80 italic tracking-wide leading-snug">
+                  A selection of projects conducted during my academic journey, blending theory and practice.
                 </p>
               </div>
+
               {!loading && (
                 <a
                   href={`https://github.com/${username}?tab=repositories`}
@@ -198,6 +200,7 @@ const GithubProjectCard = ({
                 </a>
               )}
             </div>
+
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {loading ? renderSkeleton() : renderProjects()}
