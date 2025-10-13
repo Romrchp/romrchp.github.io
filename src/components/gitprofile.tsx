@@ -142,11 +142,17 @@ const GitProfile = ({ config }: { config: Config }) => {
     } else setError(GENERIC_ERROR);
   };
 
-  const handleCopyEmail = (email: string) => {
+  // Accepts string | undefined and safely returns if undefined.
+  const handleCopyEmail = (email?: string) => {
     if (!email) return;
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      // Fallback for older browsers
+      console.error('Clipboard copy failed', err);
+    }
   };
 
   return (
@@ -231,18 +237,24 @@ const GitProfile = ({ config }: { config: Config }) => {
                               {sanitizedConfig.social.email}
                             </p>
 
-                            {/* Buttons */}
+                            {/* Buttons - guard before calling */}
                             <div className="flex justify-center gap-2">
                               <button
                                 className="btn btn-xs btn-primary"
                                 onClick={() =>
+                                  sanitizedConfig.social.email &&
                                   handleCopyEmail(sanitizedConfig.social.email)
                                 }
                               >
                                 {copied ? 'Copied!' : 'Copy'}
                               </button>
+
                               <a
-                                href={`mailto:${sanitizedConfig.social.email}`}
+                                href={
+                                  sanitizedConfig.social.email
+                                    ? `mailto:${sanitizedConfig.social.email}`
+                                    : '#'
+                                }
                                 className="btn btn-xs btn-outline"
                               >
                                 Compose
