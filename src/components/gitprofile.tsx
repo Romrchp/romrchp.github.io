@@ -143,6 +143,7 @@ const GitProfile = ({ config }: { config: Config }) => {
   };
 
   const handleCopyEmail = (email: string) => {
+    if (!email) return;
     navigator.clipboard.writeText(email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
