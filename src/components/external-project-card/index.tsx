@@ -74,7 +74,7 @@ const ExternalProjectCard = ({
           window?.open(item.link, '_blank');
         }}
       >
-        {/* Image Section with Enhanced Styling */}
+        {/* Image Section */}
         {item.imageUrl ? (
           <figure className="relative h-52 overflow-hidden bg-gradient-to-br from-primary to-secondary">
             <LazyImage
@@ -87,10 +87,7 @@ const ExternalProjectCard = ({
                 shape: '',
               })}
             />
-            {/* Gradient Overlay on hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-40 group-hover:opacity-60 transition-all duration-300"></div>
-            
-            {/* Floating icon on hover */}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="bg-white rounded-full p-4 shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-300">
                 <FaExternalLinkAlt className="text-primary text-2xl" />
@@ -98,7 +95,6 @@ const ExternalProjectCard = ({
             </div>
           </figure>
         ) : (
-          // Light gradient placeholder if no image
           <div className="relative h-52 bg-base-100 flex items-center justify-center rounded-lg border border-base-200 overflow-hidden">
             <div className="absolute inset-0 bg-white"></div>
             <FaLaptopCode className="text-gray-400 text-6xl opacity-60 relative z-10" />
@@ -124,10 +120,10 @@ const ExternalProjectCard = ({
             </div>
           )}
 
-          {/* Link indicator with color */}
+          {/* Link indicator */}
           <div className="mt-auto pt-4 border-t border-primary border-opacity-20">
             <div className="flex items-center gap-2 text-primary text-sm font-semibold group-hover:gap-3 transition-all duration-300">
-              <span>Explore Project</span>
+              <span>Explore</span>
               <FaExternalLinkAlt className="text-xs" />
             </div>
           </div>
@@ -142,20 +138,22 @@ const ExternalProjectCard = ({
         <div className="grid grid-cols-1 gap-6">
           <div className="col-span-1">
             {/* Section Header */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-2 h-10 bg-gradient-to-b from-sky-400 via-blue-500 to-indigo-600 rounded-full"></div>
-                <h5 className="text-4xl font-bold text-base-content">
-                  {loading ? (
-                    skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
-                  ) : (
-                    header
-                  )}
-                </h5>
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-2 h-10 bg-gradient-to-b from-sky-400 via-blue-500 to-indigo-600 rounded-full"></div>
+                  <h5 className="text-4xl font-bold text-base-content tracking-tight">
+                    {loading
+                      ? skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
+                      : header}
+                  </h5>
+                </div>
+
+                {/* ✨ Updated Subtitle */}
+                <p className="ml-9 mt-1 text-lg font-medium text-base-content/90 tracking-wide leading-relaxed">
+                  Featured projects and web applications developed beyond my academic work.
+                </p>
               </div>
-              <p className="text-base-content opacity-60 ml-9 text-lg">
-                Featured projects and web applications
-              </p>
             </div>
 
             {/* Projects Grid */}

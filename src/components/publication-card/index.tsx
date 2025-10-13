@@ -48,9 +48,7 @@ const PublicationCard = ({
             {(item.conferenceName || item.journalName) && (
               <div className="flex items-center gap-2 text-sm text-base-content/70">
                 <FaUniversity className="opacity-70" />
-                <span className="italic">
-                  {item.conferenceName || item.journalName}
-                </span>
+                <span>{item.conferenceName || item.journalName}</span>
               </div>
             )}
 
@@ -87,16 +85,22 @@ const PublicationCard = ({
         <div className="grid grid-cols-1 gap-6">
           <div className="col-span-1">
             {/* Section Header */}
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-2 h-10 bg-gradient-to-b from-sky-400 via-blue-500 to-indigo-600 rounded-full"></div>
-                <h5 className="text-4xl font-bold text-base-content">
-                  {loading ? skeleton({ widthCls: 'w-40', heightCls: 'h-8' }) : 'Publications'}
-                </h5>
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-2 h-10 bg-gradient-to-b from-sky-400 via-blue-500 to-indigo-600 rounded-full"></div>
+                  <h5 className="text-4xl font-bold text-base-content tracking-tight">
+                    {loading
+                      ? skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
+                      : 'Publications'}
+                  </h5>
+                </div>
+
+                {/* ✨ Updated Subtitle */}
+                <p className="ml-9 mt-1 text-lg font-medium text-base-content/90 tracking-wide leading-relaxed">
+                  Research papers and academic contributions showcasing collaborative and independent work.
+                </p>
               </div>
-              <p className="text-base-content opacity-60 ml-9 text-lg">
-                Research papers and academic contributions
-              </p>
             </div>
 
             {/* Publications Grid */}
