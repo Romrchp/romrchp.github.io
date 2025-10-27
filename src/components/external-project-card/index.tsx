@@ -78,14 +78,14 @@ const ExternalProjectCard = ({
         {item.imageUrl ? (
           <figure className="relative h-52 overflow-hidden bg-gradient-to-br from-primary to-secondary">
             <LazyImage
-              src={item.imageUrl}
-              alt={item.title}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-              placeholder={skeleton({
-                widthCls: 'w-full',
-                heightCls: 'h-full',
-                shape: '',
-              })}
+                src={item.imageUrl}
+                alt={item.title}
+                className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                placeholder={skeleton({
+                  widthCls: 'w-full',
+                  heightCls: 'h-full',
+                  shape: '',
+                })}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-40 group-hover:opacity-60 transition-all duration-300"></div>
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
