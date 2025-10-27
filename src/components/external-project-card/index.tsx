@@ -75,26 +75,26 @@ const ExternalProjectCard = ({
         }}
       >
         {/* Image Section */}
+        {/* Image Section */}
         {item.imageUrl ? (
           <figure className="relative bg-base-200 flex items-center justify-center p-4">
             <LazyImage
               src={item.imageUrl}
               alt={item.title}
               className="max-h-40 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              placeholder={skeleton({
+                widthCls: 'w-full',
+                heightCls: 'h-40',
+                shape: '',
+              })}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-40 group-hover:opacity-60 transition-all duration-300"></div>
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="bg-white rounded-full p-4 shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-300">
-                <FaExternalLinkAlt className="text-primary text-2xl" />
-              </div>
-            </div>
           </figure>
         ) : (
           <div className="relative h-52 bg-base-100 flex items-center justify-center rounded-lg border border-base-200 overflow-hidden">
-            <div className="absolute inset-0 bg-white"></div>
-            <FaLaptopCode className="text-gray-400 text-6xl opacity-60 relative z-10" />
+            <FaLaptopCode className="text-gray-400 text-6xl opacity-60" />
           </div>
         )}
+        
 
         <div className="card-body">
           {/* Header */}
