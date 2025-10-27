@@ -186,7 +186,7 @@ const GitProfile = ({ config }: { config: Config }) => {
                     {/* Avatar */}
                     {profile && (
                       <div className="avatar mb-8">
-                        <div className="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <div className="w-48 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                           <img src={profile.avatar} alt={profile.name} />
                         </div>
                       </div>
