@@ -81,7 +81,7 @@ const CONFIG = {
     telegram: '',
     website: '',
     phone: '+33 6 47 87 35 73',
-    email: 'romainrochepeau@orange.fr',
+    email: 'romain.rochepeau@gmail.com',
   },
   resume: {
     fileUrl:
