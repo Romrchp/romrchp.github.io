@@ -194,7 +194,7 @@ const GitProfile = ({ config }: { config: Config }) => {
 
                     {/* Welcome Text */}
                     <h1 className="text-5xl font-bold mb-4 text-base-content">
-                      Welcome to my Portfolio 👋🏻 
+                      Welcome to my Portfolio 👋🏻
                     </h1>
 
                     {profile && (
